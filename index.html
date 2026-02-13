@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Happy Valentine Day, Budi💖</title>
+    <title>Happy Valentine Day, Budi 💖</title>
     <style>
         body {
             margin: 0;
             padding: 0;
-            background: linear-gradient(to right, #ff758c, #ff7eb3);
+            background: url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
+            background-size: cover;
             font-family: Arial, sans-serif;
             text-align: center;
             color: white;
@@ -14,23 +15,24 @@
         }
         h1 {
             margin-top: 40px;
-            font-size: 48px;
-            text-shadow: 0 0 15px white;
+            font-size: 50px;
+            text-shadow: 0 0 20px black;
         }
         #message {
-            width: 85%;
+            width: 80%;
             margin: 20px auto;
-            font-size: 20px;
+            font-size: 22px;
             line-height: 1.6;
+            text-shadow: 0 0 10px black;
         }
         .buttons {
             margin-top: 30px;
         }
         button {
-            padding: 12px 30px;
-            font-size: 20px;
+            padding: 15px 35px;
+            font-size: 22px;
             margin: 15px;
-            border-radius: 25px;
+            border-radius: 30px;
             border: none;
             cursor: pointer;
             background: white;
@@ -41,16 +43,26 @@
             background: #ff4f81;
             color: white;
         }
+        button.shake {
+            animation: shake 0.5s;
+        }
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
         img {
             margin-top: 20px;
-            max-width: 250px;
-            border-radius: 15px;
-            box-shadow: 0 0 15px white;
+            max-width: 400px;
+            border-radius: 20px;
+            box-shadow: 0 0 25px white;
         }
         .heart {
             position: fixed;
-            width: 15px;
-            height: 15px;
+            width: 20px;
+            height: 20px;
             background: red;
             transform: rotate(45deg);
             animation: floatUp linear infinite;
@@ -58,16 +70,16 @@
         .heart:before, .heart:after {
             content: "";
             position: absolute;
-            width: 15px;
-            height: 15px;
+            width: 20px;
+            height: 20px;
             background: red;
             border-radius: 50%;
         }
-        .heart:before { top: -7px; left: 0; }
-        .heart:after { left: 7px; top: 0; }
+        .heart:before { top: -10px; left: 0; }
+        .heart:after { left: 10px; top: 0; }
         @keyframes floatUp {
             0% { transform: translateY(0) rotate(45deg); opacity: 1; }
-            100% { transform: translateY(-800px) rotate(45deg); opacity: 0; }
+            100% { transform: translateY(-900px) rotate(45deg); opacity: 0; }
         }
         #videoContainer {
             display: none;
@@ -80,7 +92,7 @@
 <h1>Happy Valentine Day 💖</h1>
 
 <div id="message">
-From the moment you came into my life, the world started to feel softer and brighter.<br>
+From the moment you entered my life, the world started to feel softer and brighter.<br>
 Your smile lifts my spirits on the hardest days, your laughter turns simple moments into treasures,<br>
 and just being with you makes everything feel complete.<br>
 Loving you isn’t something I have to think about—it’s something my heart has always known.<br>
@@ -88,15 +100,15 @@ Today, tomorrow, and always… will you be my Valentine? 💖💍
 </div>
 
 <div class="buttons">
-    <button onclick="yesClicked()">YES 😍</button>
-    <button onclick="noClicked()">NO 😢</button>
+    <button id="yesBtn" onclick="yesClicked()">YES 😍</button>
+    <button id="noBtn" onclick="noClicked()">NO 😢</button>
 </div>
 
 <div id="gifContainer"></div>
 
-<!-- Background music via YouTube embed -->
+<!-- Background music via YouTube -->
 <div id="videoContainer">
-  <iframe id="bgVideo" width="360" height="215"
+  <iframe id="bgVideo" width="420" height="250"
       src="https://www.youtube.com/embed/gD5PvB9PUfA?enablejsapi=1"
       frameborder="0"
       allow="autoplay; encrypted-media"
@@ -115,9 +127,7 @@ function yesClicked() {
         "Happy Valentine’s Day! 💖💍";
 
     document.getElementById("gifContainer").innerHTML =
-        `<img src="https://media.giphy.com/media/3o6ZsY4fXXc8ZmnKIo/giphy.gif">
-         <br>
-         <img src="https://media.giphy.com/media/l0Exk8EUzSLsrErEQ/giphy.gif">`;
+        `<img src="https://media.giphy.com/media/3o6ZsY4fXXc8ZmnKIo/giphy.gif">`;
 
     createHearts();
 
@@ -146,6 +156,11 @@ function noClicked() {
         messages[Math.min(noCount-1, messages.length-1)];
     document.getElementById("gifContainer").innerHTML =
         `<img src="${gifs[Math.min(noCount-1, gifs.length-1)]}">`;
+
+    // Shake NO button
+    const noBtn = document.getElementById("noBtn");
+    noBtn.classList.add("shake");
+    setTimeout(() => { noBtn.classList.remove("shake"); }, 500);
 }
 
 function createHearts() {
