@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Happy Valentine Day, Budi💖</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #ff758c, #ff7eb3);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: white;
+            overflow-x: hidden;
+        }
+        h1 {
+            margin-top: 40px;
+            font-size: 48px;
+            text-shadow: 0 0 15px white;
+        }
+        #message {
+            width: 85%;
+            margin: 20px auto;
+            font-size: 20px;
+            line-height: 1.6;
+        }
+        .buttons {
+            margin-top: 30px;
+        }
+        button {
+            padding: 12px 30px;
+            font-size: 20px;
+            margin: 15px;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            background: white;
+            color: #ff4f81;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #ff4f81;
+            color: white;
+        }
+        img {
+            margin-top: 20px;
+            max-width: 250px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px white;
+        }
+        .heart {
+            position: fixed;
+            width: 15px;
+            height: 15px;
+            background: red;
+            transform: rotate(45deg);
+            animation: floatUp linear infinite;
+        }
+        .heart:before, .heart:after {
+            content: "";
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: red;
+            border-radius: 50%;
+        }
+        .heart:before { top: -7px; left: 0; }
+        .heart:after { left: 7px; top: 0; }
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(45deg); opacity: 1; }
+            100% { transform: translateY(-800px) rotate(45deg); opacity: 0; }
+        }
+        #videoContainer {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Happy Valentine Day 💖</h1>
+
+<div id="message">
+From the moment you came into my life, the world started to feel softer and brighter.<br>
+Your smile lifts my spirits on the hardest days, your laughter turns simple moments into treasures,<br>
+and just being with you makes everything feel complete.<br>
+Loving you isn’t something I have to think about—it’s something my heart has always known.<br>
+Today, tomorrow, and always… will you be my Valentine? 💖💍
+</div>
+
+<div class="buttons">
+    <button onclick="yesClicked()">YES 😍</button>
+    <button onclick="noClicked()">NO 😢</button>
+</div>
+
+<div id="gifContainer"></div>
+
+<!-- Background music via YouTube embed -->
+<div id="videoContainer">
+  <iframe id="bgVideo" width="360" height="215"
+      src="https://www.youtube.com/embed/gD5PvB9PUfA?enablejsapi=1"
+      frameborder="0"
+      allow="autoplay; encrypted-media"
+      allowfullscreen>
+  </iframe>
+</div>
+
+<script>
+let noCount = 0;
+
+function yesClicked() {
+    document.getElementById("message").innerHTML =
+        "You just made me the happiest person alive! ❤️<br><br>" +
+        "Thank you for being the reason I smile, laugh, and feel complete every day. " +
+        "I love you more than words can say, and I want you beside me always. " +
+        "Happy Valentine’s Day! 💖💍";
+
+    document.getElementById("gifContainer").innerHTML =
+        `<img src="https://media.giphy.com/media/3o6ZsY4fXXc8ZmnKIo/giphy.gif">
+         <br>
+         <img src="https://media.giphy.com/media/l0Exk8EUzSLsrErEQ/giphy.gif">`;
+
+    createHearts();
+
+    // Show YouTube video & autoplay
+    const videoDiv = document.getElementById("videoContainer");
+    videoDiv.style.display = "block";
+    const iframe = document.getElementById("bgVideo");
+    iframe.src += "&autoplay=1";
+}
+
+function noClicked() {
+    noCount++;
+    const messages = [
+        "If you say no, I’ll just fall in love with you all over again tomorrow 💖",
+        "Maybe your finger slipped… because our hearts already decided yes long ago ❤️",
+        "No matter what you press, you’ll always be my favorite person in this whole world 😘",
+        "I’ll stay right here loving you gently… until you feel ready to press YES 💕"
+    ];
+    const gifs = [
+        "https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif",
+        "https://media.giphy.com/media/OPU6wzx8JrHna/giphy.gif",
+        "https://media.giphy.com/media/3o6wrvdHFbwBrUFenu/giphy.gif",
+        "https://media.giphy.com/media/ROF8OQvDmxytW/giphy.gif"
+    ];
+    document.getElementById("message").innerHTML =
+        messages[Math.min(noCount-1, messages.length-1)];
+    document.getElementById("gifContainer").innerHTML =
+        `<img src="${gifs[Math.min(noCount-1, gifs.length-1)]}">`;
+}
+
+function createHearts() {
+    setInterval(() => {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.bottom = "0px";
+        heart.style.animationDuration = (3 + Math.random()*3) + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => { heart.remove(); }, 6000);
+    }, 300);
+}
+</script>
+
+</body>
+</html>
